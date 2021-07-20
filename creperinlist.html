@@ -21,16 +21,20 @@
             console.log(objects);
             var html = '';
             html = html + '<table border="1">';
+            html = html + '<tr>';
+            html = html + '<th>' + 'ログイン名' + '</th>';
+            html = html + '<th>' + 'パスワード' + '</th>';
+            html = html + '<th>' + 'ユーザー名' + '</th>';
+            html = html + '</tr>';
             for (var i = 0; i < objects.length; i++) {
                 html = html + '<tr>';
                 var object = objects[i];
                 html = html + '<td>' + object.id + '</td>';
+                html = html + '<td>' + object.password + '</td>';
                 html = html + '<td>' + object.name + '</td>';
-                html = html + '<td>' + '<a href="update.html?userid=' + object.id + '">変更</a>' + '</td>';
+                // html = html + '<td>' + '<a href="update.html?userid=' + object.id + '">変更</a>' + '</td>';
                 html = html + '</tr>';
             }
-
-
             html = html + '</table>';
             document.getElementById('result').innerHTML = html;
         }

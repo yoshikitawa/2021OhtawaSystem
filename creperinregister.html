@@ -20,10 +20,10 @@
             var password = document.getElementById('tf2').value;
             var username = document.getElementById('tf3').value;
 
+
             var sql = `insert into Users (id, password, name) values( "${userid}","${password}", "${username}");`;
             var objects = await osql.connect(sql);
             console.log(objects);
-
             document.getElementById('result').innerHTML = 'OK';
         }
     </script>
@@ -36,7 +36,7 @@
     <br>
     パスワード:<input id="tf2" value="" type="password">
     <br>
-    名前:<input id="tf3" value="" type="textfield">
+    ゲームに表示される名前:<input id="tf3" value="" type="textfield">
     <button onclick="button1Pressed()">登録</button>
     <br>
     <p id="result"></p>
