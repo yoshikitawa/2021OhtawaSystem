@@ -48,15 +48,17 @@
                 var truenumber = Number(num.slice(-1));
                 console.log('truenumber:' + truenumber);
 
+                var sql = `insert into Questions (id,question,answer,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;     //問題あってた時に問題と回答とその時間をデータベースへgo
+                var objects = osql.connect(sql);
+                console.log(objects);
+
                 // var ransuu = [random2, random];
                 ransuu.unshift(random3);
                 // ransuu.unshift(random4);
                 document.getElementById('test').innerHTML = ransuu[1] + '　' + ransuu[0];
                 document.getElementById('test').style.fontSize = "25px";
 
-                var sql = `insert into Questions (id,question,answer,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;     //問題あってた時に問題と回答とその時間をデータベースへgo
-                var objects = osql.connect(sql);
-                console.log(objects);
+
 
 
                 if (e.key == truenumber) {
@@ -78,10 +80,6 @@
                     falsescore += 1;
                 }
 
-
-
-
-                // window.location.reload();
 
             });
 
@@ -199,11 +197,11 @@
                         fifteenscore = truescore - fourteenscore2;
                         fifteenscore2 = truescore;
                         clearInterval(testTimer);
-                        alert('終了です。お疲れ様でした')   //今は60秒に一回音鳴らして900秒でおしまい。
+                        alert('終了です。お疲れ様でした')   //今は3秒に一回音鳴らして45秒でおしまい。
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
 
                         // console.log(username);
-                        var sql = `insert into Scores (id,score,time) values( "${username}","${truescore}",now());`;     //データベースにテーブル作った。Scoreに名前スコア時間。Questionに名前と問題と回答とじかん。別ファイルで定義した文字使えるかの確認。変数でスコア入れるとおかしくなるから確認。時間の関数もまだ使えず。
+                        var sql = `insert into Scores (id,score,time) values( "${username}","${truescore}",now());`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
                         var objects = osql.connect(sql);
                         console.log(objects);
                         document.getElementById('test2').innerHTML = '|'.repeat(onescore);
@@ -260,7 +258,7 @@
                 execSelect();
             });
             async function execSelect() {
-                var sql = `SELECT * FROM Scores where id ="${username}" order by score desc limit 10`;
+                var sql = `SELECT * FROM Scores where id ="${username}" order by score desc limit 10`;      //Scoresテーブルの名前がユーザー名の人のスコアをとってくる。降順で10こまで
                 var objects = await osql.connect(sql);
                 console.log(objects);
                 var html = '';
@@ -324,6 +322,9 @@
             //         // document.getElementById('test2').innerHTML = '|'.repeat(5);
 
             //     }
+
+
+            // SELECT * FROM Questions where time > current_timestamp + interval - 15 minute; 15分前から取得
         }
 
     </script>
@@ -361,7 +362,6 @@
     <p id="test14"></p>
     <p id="test15"></p>
     <p id="test16"></p>
-
 
 
 
