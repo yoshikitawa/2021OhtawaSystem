@@ -22,12 +22,25 @@
 
         var truescore = 0;
         var falsescore = 0;
+        var id = 0;
+        var questionresult;
 
-        window.onload = function () {       //初期
-            document.getElementById('test').innerHTML = random + '　' + random2;
-            document.getElementById('test').style.fontSize = "25px";
 
-        }
+
+        // var date1;
+        // var date2;
+
+        // var questiontime = 0;    //問題の表示時間で使うカウント
+
+        // window.onload = function () {       //初期
+        //     document.getElementById('test').innerHTML = random + '　' + random2;
+        //     document.getElementById('test').style.fontSize = "25px";
+
+        // }
+
+
+
+
 
 
         window.addEventListener('DOMContentLoaded', function () {
@@ -37,6 +50,10 @@
 
             window.addEventListener("keypress", function (e) {      //ボタン押した時
 
+                // date3 = new Date();
+                // date4 = date1.getFullYear() + "年" + (date1.getMonth() + 1) + "月" + date1.getDate() + "日" + date1.getHours() + "時" + date1.getMinutes() + "分" + date1.getSeconds() + "秒" + date1.getMilliseconds() + "ミリ秒";
+                // console.log(date4);
+                id += 1;
 
                 var number = ransuu[0] + ransuu[1];
                 var random3 = Math.floor(Math.random() * 10);       //右に出てくるやつ
@@ -48,22 +65,9 @@
                 var truenumber = Number(num.slice(-1));
                 console.log('truenumber:' + truenumber);
 
-                var sql = `insert into Questions (id,question,answer,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;     //問題あってた時に問題と回答とその時間をデータベースへgo
-                var objects = osql.connect(sql);
-                console.log(objects);
-
-                // var ransuu = [random2, random];
-                ransuu.unshift(random3);
-                // ransuu.unshift(random4);
-                document.getElementById('test').innerHTML = ransuu[1] + '　' + ransuu[0];
-                document.getElementById('test').style.fontSize = "25px";
-
-
-
-
                 if (e.key == truenumber) {
                     truescore += 1;
-
+                    questionresult = "○";
 
                     // if (!value) {
                     //     //valueに何も入っていなかったら
@@ -78,7 +82,40 @@
                 }
                 else {
                     falsescore += 1;
+                    questionresult = "×";
                 }
+
+
+                // var sql = `insert into Questions (id,question,answer,questiontime,answertime,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}","${date4}","${date4}",now(2));`;     //問題あってた時に問題と回答とその時間をデータベースへgo
+                var sql = `insert into Questions (id,question,answer,time,name,session,result) values( "${id}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now(2),"${username}","${timescore + 1}","${questionresult}");`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+
+
+
+                // if (questiontime == 0) {
+                //     var sql = `insert into Questions (id,question,answer,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;     //問題あってた時に問題と回答とその時間をデータベースへgo
+                //     var objects = osql.connect(sql);
+                //     console.log(objects);
+                // }
+                // if (questiontime == 1) {
+                //     var sql = `insert into Questions (id,question,answer,questiontime) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;    //問題回答時間
+                //     var objects = osql.connect(sql);
+                //     console.log(objects);
+                // }
+                // questiontime = 1;
+
+
+                // var ransuu = [random2, random];
+                ransuu.unshift(random3);
+                // ransuu.unshift(random4);
+                document.getElementById('test').innerHTML = ransuu[1] + '　' + ransuu[0];
+                document.getElementById('test').style.fontSize = "25px";
+
+
+
+
+
 
 
             });
@@ -130,8 +167,17 @@
 
             // }, false);
 
-            button.addEventListener("click", function () {
+            button.addEventListener("click", function () {      //開始ボタンの処理
                 audio.load();
+
+                date1 = new Date();
+                date2 = date1.getFullYear() + "年" + (date1.getMonth() + 1) + "月" + date1.getDate() + "日" + date1.getHours() + "時" + date1.getMinutes() + "分" + date1.getSeconds() + "秒" + date1.getMilliseconds() + "ミリ秒";
+                console.log(date2);
+
+                document.getElementById('test').innerHTML = random + '　' + random2;
+                document.getElementById('test').style.fontSize = "25px";
+
+
                 var testTimer = setInterval(function () {       //毎時間ごとの処理が始まる
                     audio.play();
                     timescore += 1;
@@ -139,63 +185,78 @@
 
                     if (timescore == 1) {
                         onescore = truescore;   //1分めの
+                        id = 0;
 
                     }
                     if (timescore == 2) {
                         twoscore = truescore - onescore; //2分目のスコア
                         twoscore2 = truescore;          //2分での総スコア
+                        id = 0;
                     }
                     if (timescore == 3) {
                         threescore = truescore - twoscore2;  //3分目のスコア
                         threescore2 = truescore;           //3分間での総スコア
+                        id = 0;
                     }
                     if (timescore == 4) {
                         fourscore = truescore - threescore2;
                         fourscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 5) {
                         fivescore = truescore - fourscore2;
                         fivescore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 6) {
                         sixscore = truescore - fivescore2;
                         sixscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 7) {
                         sevenscore = truescore - sixscore2;
                         sevenscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 8) {
                         eightscore = truescore - sevenscore2;
                         eightscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 9) {
                         ninescore = truescore - eightscore2;
                         ninescore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 10) {
                         tenscore = truescore - ninescore2;
                         tenscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 11) {
                         elevenscore = truescore - tenscore2;
                         elevenscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 12) {
                         twelvescore = truescore - elevenscore2;
                         twelvescore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 13) {
                         thirteenscore = truescore - twelvescore2;
                         thirteenscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 14) {
                         fourteenscore = truescore - thirteenscore2;
                         fourteenscore2 = truescore;
+                        id = 0;
                     }
                     if (timescore == 15) {
                         fifteenscore = truescore - fourteenscore2;
                         fifteenscore2 = truescore;
+                        id = 0;
                         clearInterval(testTimer);
                         alert('終了です。お疲れ様でした')   //今は3秒に一回音鳴らして45秒でおしまい。
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
@@ -254,10 +315,12 @@
 
 
         function result() {
+
             $(document).ready(function () {
                 execSelect();
             });
             async function execSelect() {
+
                 var sql = `SELECT * FROM Scores where id ="${username}" order by score desc limit 10`;      //Scoresテーブルの名前がユーザー名の人のスコアをとってくる。降順で10こまで
                 var objects = await osql.connect(sql);
                 console.log(objects);
@@ -277,9 +340,8 @@
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
-                document.getElementById('result2').innerHTML = html;
+                document.getElementById('test').innerHTML = html;
             }
-
         }
 
 
@@ -308,8 +370,9 @@
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
-                document.getElementById('result2').innerHTML = html;
+                document.getElementById('test').innerHTML = html;
             }
+
             //     // if (!value) {
             //     //     document.getElementById('test').innerHTML = 'あなたのスコアは' + 0 + 'です';
             //     // }
@@ -334,7 +397,7 @@
 <body>
     <h1>クレペリン検査</h1>
     <audio id="music">
-        <source src="警告音2.mp3" type="audio/mp3">
+        <source src="決定ボタン.mp3" type="audio/mp3">
     </audio>
     <FORM id="musicform">
         <INPUT id="playbutton" type="button" value="開始">
@@ -344,8 +407,8 @@
     <button onclick="result()">自分のランキングを見る</button>
     <button onclick="result2()">全ユーザのランキングを見る</button>
     <hr>
-    <p id="result"></p>
-    <p id="result2"></p>
+    <!-- <p id="result"></p>
+    <p id="result2"></p> -->
     <p id="test"></p>
     <p id="test2"></p>
     <p id="test3"></p>
