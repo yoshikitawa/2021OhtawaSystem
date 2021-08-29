@@ -15,11 +15,13 @@
             execInsert();
         }
 
+        localStorage.setItem('rank', Number(1));
+        localStorage.setItem('point', Number(0));
+
         async function execInsert() {
             var userid = document.getElementById('tf1').value;
             var password = document.getElementById('tf2').value;
             var username = document.getElementById('tf3').value;
-
 
             var sql = `insert into Users (id, password, name) values( "${userid}","${password}", "${username}");`;
             var objects = await osql.connect(sql);

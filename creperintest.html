@@ -27,18 +27,14 @@
 
 
 
-        // var date1;
-        // var date2;
+        var point = Number(localStorage.getItem('point'));
+        var rank = Number(localStorage.getItem('rank'));
 
-        // var questiontime = 0;    //問題の表示時間で使うカウント
-
-        // window.onload = function () {       //初期
-        //     document.getElementById('test').innerHTML = random + '　' + random2;
-        //     document.getElementById('test').style.fontSize = "25px";
-
-        // }
-
-
+        function a() {//ボタン押したら経験値を0に戻す
+            point = 0;
+            sessionStorage.point = point;
+            console.log(point);
+        }
 
 
 
@@ -49,10 +45,6 @@
 
 
             window.addEventListener("keypress", function (e) {      //ボタン押した時
-
-                // date3 = new Date();
-                // date4 = date1.getFullYear() + "年" + (date1.getMonth() + 1) + "月" + date1.getDate() + "日" + date1.getHours() + "時" + date1.getMinutes() + "分" + date1.getSeconds() + "秒" + date1.getMilliseconds() + "ミリ秒";
-                // console.log(date4);
                 id += 1;
 
                 var number = ransuu[0] + ransuu[1];
@@ -68,47 +60,17 @@
                 if (e.key == truenumber) {
                     truescore += 1;
                     questionresult = "○";
-
-                    // if (!value) {
-                    //     //valueに何も入っていなかったら
-                    //     value = 1;
-
-                    // } else {
-                    //     value = parseInt(value) + 1;
-                    // }
-
-                    // sessionStorage.score = value;
-                    // console.log(value);
                 }
                 else {
                     falsescore += 1;
                     questionresult = "×";
                 }
 
-
-                // var sql = `insert into Questions (id,question,answer,questiontime,answertime,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}","${date4}","${date4}",now(2));`;     //問題あってた時に問題と回答とその時間をデータベースへgo
                 var sql = `insert into Questions (id,question,answer,time,name,session,result) values( "${id}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now(2),"${username}","${timescore + 1}","${questionresult}");`;
                 var objects = osql.connect(sql);
                 console.log(objects);
 
-
-
-                // if (questiontime == 0) {
-                //     var sql = `insert into Questions (id,question,answer,time) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;     //問題あってた時に問題と回答とその時間をデータベースへgo
-                //     var objects = osql.connect(sql);
-                //     console.log(objects);
-                // }
-                // if (questiontime == 1) {
-                //     var sql = `insert into Questions (id,question,answer,questiontime) values( "${username}","${ransuu[1] + '' + ransuu[0]}","${e.key}",now());`;    //問題回答時間
-                //     var objects = osql.connect(sql);
-                //     console.log(objects);
-                // }
-                // questiontime = 1;
-
-
-                // var ransuu = [random2, random];
                 ransuu.unshift(random3);
-                // ransuu.unshift(random4);
                 document.getElementById('test').innerHTML = ransuu[1] + '　' + ransuu[0];
                 document.getElementById('test').style.fontSize = "25px";
 
@@ -126,7 +88,6 @@
 
 
         function otameshi() {
-            // sessionStorage.clear();
             window.location.reload();
 
         }
@@ -150,22 +111,11 @@
         var fourteenscore = 0;
         var fifteenscore = 0;
         var username = sessionStorage.getItem('username');
+
+
         document.addEventListener("DOMContentLoaded", function () {
             var audio = document.getElementById("music");
             var button = document.getElementById("playbutton");
-            // button.addEventListener("click", function () {
-            //     audio.load();
-            //     var testTimer = setInterval(function () {       //毎時間ごとの処理が始まる
-            //         audio.play();
-            //         timescore = timescore + 1;
-            //         console.log('timescore:' + timescore);
-            //         if (timescore == 2) {
-            //             clearInterval(testTimer);
-            //             alert('終了です。お疲れ様でした')   //今は10秒に一回音鳴らして20秒でおしまい。
-            //         }
-            //     }, 10000);
-
-            // }, false);
 
             button.addEventListener("click", function () {      //開始ボタンの処理
                 audio.load();
@@ -261,7 +211,6 @@
                         alert('終了です。お疲れ様でした')   //今は3秒に一回音鳴らして45秒でおしまい。
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
 
-                        // console.log(username);
                         var sql = `insert into Scores (id,score,time) values( "${username}","${truescore}",now());`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
                         var objects = osql.connect(sql);
                         console.log(objects);
@@ -281,33 +230,216 @@
                         document.getElementById('test15').innerHTML = '|'.repeat(fourteenscore);
                         document.getElementById('test16').innerHTML = '|'.repeat(fifteenscore);
 
-                        // $(document).ready(function () {
-                        //     execSelect();
-                        // });
-                        // async function execSelect() {
-                        //     var sql = `SELECT * FROM Scores where id ="${username}" order by score desc limit 10`;
-                        //     var objects = await osql.connect(sql);
-                        //     console.log(objects);
-                        //     var html = '';
-                        //     html = html + '<table border="1">';
-                        //     html = html + '<tr>';
-                        //     html = html + '<th>' + 'ユーザー名' + '</th>';
-                        //     html = html + '<th>' + 'スコア' + '</th>';
-                        //     html = html + '<th>' + '時間' + '</th>';
-                        //     html = html + '</tr>';
-                        //     for (var i = 0; i < objects.length; i++) {
-                        //         html = html + '<tr>';
-                        //         var object = objects[i];
-                        //         html = html + '<td>' + object.id + '</td>';
-                        //         html = html + '<td>' + object.score + '</td>';
-                        //         html = html + '<td>' + object.time + '</td>';
-                        //         html = html + '</tr>';
-                        //     }
-                        //     html = html + '</table>';
-                        //     document.getElementById('result').innerHTML = html;
-                        // }
+
+                        document.getElementById('point').innerHTML = '経験値を10獲得しました';
+                        var rank2 = rank;
+                        point = point + 10;
+                        localStorage.point = point;
+                        console.log(point);
+                        if (point >= 10517) {
+                            rank = 50;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 9550) {
+                            rank = 49;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 8671) {
+                            rank = 48;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 7872) {
+                            rank = 47;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 7146) {
+                            rank = 46;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 6486) {
+                            rank = 45;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 5886) {
+                            rank = 44;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 5341) {
+                            rank = 43;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 4846) {
+                            rank = 42;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 4391) {
+                            rank = 41;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 3987) {
+                            rank = 40;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 3615) {
+                            rank = 39;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 3277) {
+                            rank = 38;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 2970) {
+                            rank = 37;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 2691) {
+                            rank = 36;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 2437) {
+                            rank = 35;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 2206) {
+                            rank = 34;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1996) {
+                            rank = 33;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1805) {
+                            rank = 32;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1631) {
+                            rank = 31;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1473) {
+                            rank = 30;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1329) {
+                            rank = 29;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1198) {
+                            rank = 28;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 1079) {
+                            rank = 27;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 971) {
+                            rank = 26;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 873) {
+                            rank = 25;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 784) {
+                            rank = 24;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 703) {
+                            rank = 23;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 629) {
+                            rank = 22;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 562) {
+                            rank = 21;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 501) {
+                            rank = 20;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 446) {
+                            rank = 19;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 396) {
+                            rank = 18;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 351) {
+                            rank = 17;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 310) {
+                            rank = 16;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 273) {
+                            rank = 15;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 239) {
+                            rank = 14;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 208) {
+                            rank = 13;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 180) {
+                            rank = 12;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 155) {
+                            rank = 11;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 132) {
+                            rank = 10;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 111) {
+                            rank = 9;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 92) {
+                            rank = 8;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 75) {
+                            rank = 7;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 60) {
+                            rank = 6;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 46) {
+                            rank = 5;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 33) {
+                            rank = 4;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 21) {
+                            rank = 3;
+                            localStorage.rank = rank;
+                        }
+                        else if (point >= 10) {
+                            rank = 2;
+                            localStorage.rank = rank;
+                        }
+                        if (rank2 < rank) {
+                            console.log(rank)
+                            console.log(rank2)
+                            document.getElementById('rank').innerHTML = 'ランクが' + rank + 'になりました';
+                        }
+
                     }
-                }, 3000);
+                }, 1000);
 
             }, false);
 
@@ -373,20 +505,6 @@
                 document.getElementById('test').innerHTML = html;
             }
 
-            //     // if (!value) {
-            //     //     document.getElementById('test').innerHTML = 'あなたのスコアは' + 0 + 'です';
-            //     // }
-            //     if (!truescore || !falsescore) {
-            //         document.getElementById('test').innerHTML = 'あなたのスコアは' + 0 + 'です';
-            //     }
-            //     else {
-            //         // document.getElementById('test').innerHTML = 'あなたのスコアは' + value + 'です';
-            //         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
-            //         // document.getElementById('test2').innerHTML = '|'.repeat(5);
-
-            //     }
-
-
             // SELECT * FROM Questions where time > current_timestamp + interval - 15 minute; 15分前から取得
         }
 
@@ -401,7 +519,7 @@
     </audio>
     <FORM id="musicform">
         <INPUT id="playbutton" type="button" value="開始">
-        <button onclick="otameshi()">リフレッシュ</button>
+        <button onclick="otameshi()">もう一度遊ぶ</button>
 
     </FORM>
     <button onclick="result()">自分のランキングを見る</button>
@@ -409,6 +527,8 @@
     <hr>
     <!-- <p id="result"></p>
     <p id="result2"></p> -->
+    <p id="point"></p>
+    <h2 id="rank"></h2>
     <p id="test"></p>
     <p id="test2"></p>
     <p id="test3"></p>
@@ -425,6 +545,23 @@
     <p id="test14"></p>
     <p id="test15"></p>
     <p id="test16"></p>
+
+
+    <!-- <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">1</button>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">2</button>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">3</button>
+    <br>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">4</button>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">5</button>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">6</button>
+    <br>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">7</button>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">8</button>
+    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">9</button> -->
+
+
+
+    <button onclick="a()">a</button>
 
 
 
