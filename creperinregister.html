@@ -15,7 +15,7 @@
             execInsert();
         }
 
-        localStorage.setItem('rank', Number(1));
+        localStorage.setItem('rank', Number(1));        //このページきちゃうとランクとポイント初期化されちゃうから実際は下の関数の中に入れたほうがいいかも
         localStorage.setItem('point', Number(0));
 
         async function execInsert() {
