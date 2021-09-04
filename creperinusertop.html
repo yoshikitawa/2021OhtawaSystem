@@ -56,7 +56,7 @@
                     var objects = osql.connect(sql);
                     console.log(objects);
 
-                    var sql = `SELECT * FROM Chat order by time desc limit 15; `;
+                    var sql = `SELECT * FROM Chat order by time desc limit 10; `;
                     var objects = await osql.connect(sql);
                     console.log(objects);
                     var html = '';
@@ -84,7 +84,7 @@
 
 
         window.onload = async function () {
-            var sql = `SELECT * FROM Chat order by time desc limit 15; `;
+            var sql = `SELECT * FROM Chat order by time desc limit 10; `;
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
