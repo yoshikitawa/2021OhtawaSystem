@@ -15,13 +15,14 @@
             execInsert();
         }
 
-        localStorage.setItem('rank', Number(1));        //このページきちゃうとランクとポイント初期化されちゃうから実際は下の関数の中に入れたほうがいいかも
-        localStorage.setItem('point', Number(0));
+
 
         async function execInsert() {
             var userid = document.getElementById('tf1').value;
             var password = document.getElementById('tf2').value;
             var username = document.getElementById('tf3').value;
+            localStorage.setItem('rank', Number(1));        //このページきちゃうとランクとポイント初期化されちゃう。初期登録の時以外はこのページにアクセスしないようにする。
+            localStorage.setItem('point', Number(0));
 
             var sql = `insert into Users (id, password, name) values( "${userid}","${password}", "${username}");`;
             var objects = await osql.connect(sql);

@@ -64,14 +64,14 @@
                     html = html + '<tr>';
                     html = html + '<th>' + 'ユーザー名' + '</th>';
                     html = html + '<th>' + 'ツイート' + '</th>';
-                    // html = html + '<th>' + '時間' + '</th>';
+                    html = html + '<th>' + '時間' + '</th>';
                     html = html + '</tr>';
                     for (var i = 0; i < objects.length; i++) {
                         html = html + '<tr>';
                         var object = objects[i];
                         html = html + '<td>' + object.username + '</td>';
                         html = html + '<td>' + object.tweet + '</td>';
-                        // html = html + '<td>' + object.time + '</td>';
+                        html = html + '<td>' + object.time + '</td>';
                         html = html + '</tr>';
                     }
                     html = html + '</table>';
@@ -92,19 +92,23 @@
             html = html + '<tr>';
             html = html + '<th>' + 'ユーザー名' + '</th>';
             html = html + '<th>' + 'ツイート' + '</th>';
-            // html = html + '<th>' + '時間' + '</th>';
+            html = html + '<th>' + '時間' + '</th>';
             html = html + '</tr>';
             for (var i = 0; i < objects.length; i++) {
                 html = html + '<tr>';
                 var object = objects[i];
                 html = html + '<td>' + object.username + '</td>';
                 html = html + '<td>' + object.tweet + '</td>';
-                // html = html + '<td>' + object.time + '</td>';
+                html = html + '<td>' + object.time + '</td>';
                 html = html + '</tr>';
             }
             html = html + '</table>';
             document.getElementById('chat').innerHTML = html;
         }
+
+
+
+
 
 
 
@@ -121,7 +125,28 @@
     <h2>ランク</h2>
     <p id="rank"></p>
     <h2>バッジ</h2>
-    <p id="badge"></p>
+    <!-- <p id="badge"></p> -->
+    <!-- <canvas id="canvas" width="600" height="400"></canvas> -->
+    <button onclick="button1()" style="width: 90px; height: 90px;">ゲームを10回した</button>
+    <button onclick="button2()" style="width: 90px; height: 90px;">ゲームを50回した</button>
+    <button onclick="button3()" style="width: 90px; height: 90px;">ゲームを100回した</button>
+    <button onclick="button4()" style="width: 90px; height: 90px;">ゲームを1時間した</button>
+    <br>
+    <button onclick="button5()" style="width: 90px; height: 90px;">ゲームを10時間した</button>
+    <button onclick="button6()" style="width: 90px; height: 90px;">ゲームを20時間した</button>
+    <button onclick="button7()" style="width: 90px; height: 90px;">ゲームを50時間した</button>
+    <button onclick="button8()" style="width: 90px; height: 90px;">スコア500突破</button>
+    <br>
+    <button onclick="button9()" style="width: 90px; height: 90px;">スコア550突破</button>
+    <button onclick="button10()" style="width: 90px; height: 90px;">スコア600突破</button>
+    <button onclick="button11()" style="width: 90px; height: 90px;">ランク10突破</button>
+    <button onclick="button12()" style="width: 90px; height: 90px;">ランク30突破</button>
+    <br>
+    <button onclick="button13()" style="width: 90px; height: 90px;">ランク50突破</button>
+    <button onclick="button14()" style="width: 90px; height: 90px;">正解率90%超えた</button>
+    <button onclick="button15()" style="width: 90px; height: 90px;">正解率95%超えた</button>
+    <button onclick="button16()" style="width: 90px; height: 90px;">正解率100%達成</button>
+
 </div>
 <div class="right" style="float: right; padding-right: 100px; padding-left: 100px;">
     <h2>チャット</h2>
