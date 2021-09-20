@@ -83,7 +83,7 @@
         }
 
 
-        window.onload = async function () {
+        window.onload = async function () {     //トップページ読み込み時処理
             var sql = `SELECT * FROM Chat order by time desc limit 10; `;
             var objects = await osql.connect(sql);
             console.log(objects);
@@ -104,12 +104,24 @@
             }
             html = html + '</table>';
             document.getElementById('chat').innerHTML = html;
+
+
+
+
+            if (rank >= 21) {           //バッジの処理
+                document.getElementById('btn1').click();        //上のif条件達成時に下に書いたボタンを押す
+            }
         }
 
 
 
-
-
+        document.addEventListener("DOMContentLoaded", function () {     //ボタンを押したら色変える
+            document.getElementById('btn1').addEventListener('click',
+                function () {
+                    this.style.backgroundColor = "red";
+                }
+            )
+        })
 
 
 
@@ -126,8 +138,7 @@
     <p id="rank"></p>
     <h2>バッジ</h2>
     <!-- <p id="badge"></p> -->
-    <!-- <canvas id="canvas" width="600" height="400"></canvas> -->
-    <button onclick="button1()" style="width: 90px; height: 90px;">ゲームを10回した</button>
+    <button id="btn1" style="width: 90px; height: 90px;">ゲームを10回した</button>
     <button onclick="button2()" style="width: 90px; height: 90px;">ゲームを50回した</button>
     <button onclick="button3()" style="width: 90px; height: 90px;">ゲームを100回した</button>
     <button onclick="button4()" style="width: 90px; height: 90px;">ゲームを1時間した</button>
