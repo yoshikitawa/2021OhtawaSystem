@@ -13,6 +13,13 @@
 
     <script>
         osql.requireLogin();
+
+
+        var visit = Number(localStorage.getItem('visit'));      //creperinregisterにvisitをsessionStorageに保存されている。それの呼び出し。
+
+
+
+
         var random = Math.floor(Math.random() * 10);    //左の乱数
         var random2 = Math.floor(Math.random() * 10);   //右の乱数
         var ransuu = [];
@@ -29,12 +36,6 @@
 
         var point = Number(localStorage.getItem('point'));
         var rank = Number(localStorage.getItem('rank'));
-
-        // function a() {//ボタン押したら経験値を0に戻す
-        //     point = 0;
-        //     sessionStorage.point = point;
-        //     console.log(point);
-        // }
 
 
 
@@ -208,8 +209,23 @@
                         fifteenscore2 = truescore;
                         id = 0;
                         clearInterval(testTimer);
-                        alert('終了です。お疲れ様でした')   //今は3秒に一回音鳴らして45秒でおしまい。
+                        alert('終了です。お疲れ様でした')   //今は1秒に一回音鳴らして15秒でおしまい。
+
+                        localStorage.visit = visit + 1;     //ゲームをした回数のカウント(ゲームが終わったら1ずつ増える)
+                        console.log(visit);
+
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
+
+
+
+                        if (truescore >= 5) {         //scoreを保存しとく。
+                            localStorage.setItem('badgescore', truescore);
+                        }
+                        if (truescore / (truescore + falsescore) * 100 >= 90) {
+                            localStorage.setItem('answerrate', truescore / (truescore + falsescore) * 100);
+                        }
+
+
 
                         var sql = `insert into Scores (id,score,time) values( "${username}","${truescore}",now());`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
                         var objects = osql.connect(sql);
@@ -542,7 +558,7 @@
                     }
 
 
-                }, 1000);
+                }, 1000);       //今は1秒おきにしてる。本来は60秒おき
 
             }, false);
 
