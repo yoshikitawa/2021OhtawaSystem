@@ -21,7 +21,7 @@
             document.getElementById('rank').innerHTML = username + 'さんのランクは' + rank + 'です';
         }
 
-
+        var ctn = 0;
         var rank = localStorage.getItem('rank');      //creperinregisterにrank1をsessionStorageに保存されている。それの呼び出し。
 
 
@@ -52,7 +52,7 @@
                 });
                 async function execSelect() {
                     var content = document.getElementById('content').value;
-                    var sql = `insert into Chat (username,tweet,time) values( "${username}","${content}",now());`;
+                    var sql = `insert into Chat (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
                     var objects = osql.connect(sql);
                     console.log(objects);
 
@@ -63,6 +63,7 @@
                     html = html + '<table border="1">';
                     html = html + '<tr>';
                     html = html + '<th>' + 'ユーザー名' + '</th>';
+                    html = html + '<th>' + 'ランク' + '</th>';
                     html = html + '<th>' + 'ツイート' + '</th>';
                     html = html + '<th>' + '時間' + '</th>';
                     html = html + '</tr>';
@@ -70,6 +71,7 @@
                         html = html + '<tr>';
                         var object = objects[i];
                         html = html + '<td>' + object.username + '</td>';
+                        html = html + '<td>' + object.rank + '</td>';
                         html = html + '<td>' + object.tweet + '</td>';
                         html = html + '<td>' + object.time + '</td>';
                         html = html + '</tr>';
@@ -89,6 +91,7 @@
         var rank = localStorage.getItem('rank');    //rankによってバッジの色変
         var answerrate = localStorage.getItem('answerrate');
 
+
         window.onload = async function () {     //トップページ読み込み時処理
             var sql = `SELECT * FROM Chat order by time desc limit 10; `;
             var objects = await osql.connect(sql);
@@ -97,6 +100,7 @@
             html = html + '<table border="1">';
             html = html + '<tr>';
             html = html + '<th>' + 'ユーザー名' + '</th>';
+            html = html + '<th>' + 'ランク' + '</th>';
             html = html + '<th>' + 'ツイート' + '</th>';
             html = html + '<th>' + '時間' + '</th>';
             html = html + '</tr>';
@@ -104,6 +108,7 @@
                 html = html + '<tr>';
                 var object = objects[i];
                 html = html + '<td>' + object.username + '</td>';
+                html = html + '<td>' + object.rank + '</td>';
                 html = html + '<td>' + object.tweet + '</td>';
                 html = html + '<td>' + object.time + '</td>';
                 html = html + '</tr>';
@@ -117,143 +122,176 @@
             //バッジの処理
 
             if (visit >= 10) {
+                document.getElementById("btn1").removeAttribute("disabled");    //ボタン押せるようにする
                 document.getElementById('btn1').click();        //上のif条件達成時に下に書いたボタンを押す
             }
             if (visit >= 30) {
+                document.getElementById("btn2").removeAttribute("disabled");
                 document.getElementById('btn2').click();
             }
             if (visit >= 50) {
+                document.getElementById("btn3").removeAttribute("disabled");
                 document.getElementById('btn3').click();
             }
 
 
             if (visit >= 4) {        //1回15分だから4回で1時間。今は1回15秒。
+                document.getElementById("btn4").removeAttribute("disabled");
                 document.getElementById('btn4').click();
             }
             if (visit >= 12) {
+                document.getElementById("btn5").removeAttribute("disabled");
                 document.getElementById('btn5').click();
             }
             if (visit >= 20) {
+                document.getElementById("btn6").removeAttribute("disabled");
                 document.getElementById('btn6').click();
             }
             if (visit >= 40) {
+                document.getElementById("btn7").removeAttribute("disabled");
                 document.getElementById('btn7').click();
             }
 
             if (badgescore >= 5) {          //今はスコア5行ったらにしてる。本当は500
+                document.getElementById("btn8").removeAttribute("disabled");
                 document.getElementById('btn8').click();
             }
             if (badgescore >= 7) {
+                document.getElementById("btn9").removeAttribute("disabled");
                 document.getElementById('btn9').click();
             }
             if (badgescore >= 10) {
+                document.getElementById("btn10").removeAttribute("disabled");
                 document.getElementById('btn10').click();
             }
 
             if (rank >= 10) {
+                document.getElementById("btn11").removeAttribute("disabled");
                 document.getElementById('btn11').click();
             }
             if (rank >= 30) {
+                document.getElementById("btn12").removeAttribute("disabled");
                 document.getElementById('btn12').click();
             }
             if (rank >= 50) {
+                document.getElementById("btn13").removeAttribute("disabled");
                 document.getElementById('btn13').click();
             }
 
             if (answerrate >= 90) {
+                document.getElementById("btn14").removeAttribute("disabled");
                 document.getElementById('btn14').click();
             }
             if (answerrate >= 95) {
+                document.getElementById("btn15").removeAttribute("disabled");
                 document.getElementById('btn15').click();
             }
             if (answerrate >= 100) {
+                document.getElementById("btn16").removeAttribute("disabled");
                 document.getElementById('btn16').click();
             }
         }
 
 
 
-        document.addEventListener("DOMContentLoaded", function () {     //ボタンを押したら色変える
+        document.addEventListener("DOMContentLoaded", function () {     //以下はボタンを押したら色変える
+            document.getElementById("btn1").setAttribute("disabled", true);     //ボタン押せないようにする
             document.getElementById('btn1').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn2").setAttribute("disabled", true);
             document.getElementById('btn2').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn3").setAttribute("disabled", true);
             document.getElementById('btn3').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn4").setAttribute("disabled", true);
             document.getElementById('btn4').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn5").setAttribute("disabled", true);
             document.getElementById('btn5').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn6").setAttribute("disabled", true);
             document.getElementById('btn6').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn7").setAttribute("disabled", true);
             document.getElementById('btn7').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn8").setAttribute("disabled", true);
             document.getElementById('btn8').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn9").setAttribute("disabled", true);
             document.getElementById('btn9').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn10").setAttribute("disabled", true);
             document.getElementById('btn10').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn11").setAttribute("disabled", true);
             document.getElementById('btn11').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn12").setAttribute("disabled", true);
             document.getElementById('btn12').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn13").setAttribute("disabled", true);
             document.getElementById('btn13').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn14").setAttribute("disabled", true);
             document.getElementById('btn14').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn15").setAttribute("disabled", true);
             document.getElementById('btn15').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            document.getElementById("btn16").setAttribute("disabled", true);
             document.getElementById('btn16').addEventListener('click',
                 function () {
                     this.style.backgroundColor = "red";
                 }
             )
+            console.log(ctn);
         })
 
 
@@ -297,6 +335,7 @@
     <input type="text" id="content">
     <button onclick="tweet()">つぶやく</button>
     <p id="chat"></p>
+    <p>※つぶやき時点のランクです</p>
 </div>
 
 <!-- <button onclick="a()">a</button>
