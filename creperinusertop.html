@@ -135,7 +135,7 @@
             }
 
 
-            if (visit >= 4) {        //1回15分だから4回で1時間。今は1回15秒。
+            if (visit >= 4) {        //1回15分だから4回で1時間。今は1回45秒。
                 document.getElementById("btn4").removeAttribute("disabled");
                 document.getElementById('btn4').click();
             }
@@ -291,10 +291,49 @@
                     this.style.backgroundColor = "red";
                 }
             )
-            console.log(ctn);
+            // console.log(ctn);
         })
 
 
+
+        var rankcount = 0;
+        var badgecount = 0;
+        var chatcount = 0;
+        document.addEventListener("DOMContentLoaded", function () {     //ボタン押したら消す
+            var rankbutton = document.getElementById("rankbutton");
+            var badgebutton = document.getElementById("badgebutton");
+            var chatbutton = document.getElementById("chatbutton");
+            rankbutton.addEventListener("click", function () {
+                if (rankcount == 0) {
+                    document.getElementById("disp1").style.display = "none";
+                    rankcount = 1;
+                }
+                else if (rankcount == 1) {
+                    document.getElementById("disp1").style.display = "block";
+                    rankcount = 0;
+                }
+            }, false);
+            badgebutton.addEventListener("click", function () {
+                if (badgecount == 0) {
+                    document.getElementById("disp2").style.display = "none";
+                    badgecount = 1;
+                }
+                else if (badgecount == 1) {
+                    document.getElementById("disp2").style.display = "block";
+                    badgecount = 0;
+                }
+            }, false);
+            chatbutton.addEventListener("click", function () {
+                if (chatcount == 0) {
+                    document.getElementById("disp3").style.display = "none";
+                    chatcount = 1;
+                }
+                else if (chatcount == 1) {
+                    document.getElementById("disp3").style.display = "block";
+                    chatcount = 0;
+                }
+            }, false);
+        }, false);
 
     </script>
 
@@ -304,38 +343,54 @@
 <p id="welcome"></p>
 <a href="creperintest.html">クレペリン検査はこちら</a>
 <br>
-<div class="left" style="float: left;">
-    <h2>ランク</h2>
-    <p id="rank"></p>
-    <h2>バッジ</h2>
-    <!-- <p id="badge"></p> -->
-    <button id="btn1" style="width: 90px; height: 90px;">ゲームを10回した</button>
-    <button id="btn2" style="width: 90px; height: 90px;">ゲームを30回した</button>
-    <button id="btn3" style="width: 90px; height: 90px;">ゲームを50回した</button>
-    <button id="btn4" style="width: 90px; height: 90px;">ゲームを1時間した</button>
+<br>
+<form>
+    <input id="rankbutton" type="checkbox" value="">ランク表示・非表示
     <br>
-    <button id="btn5" style="width: 90px; height: 90px;">ゲームを3時間した</button>
-    <button id="btn6" style="width: 90px; height: 90px;">ゲームを5時間した</button>
-    <button id="btn7" style="width: 90px; height: 90px;">ゲームを10時間した</button>
-    <button id="btn8" style="width: 90px; height: 90px;">スコア500突破</button>
+    <input id="badgebutton" type="checkbox" value="">バッジ表示・非表示
     <br>
-    <button id="btn9" style="width: 90px; height: 90px;">スコア550突破</button>
-    <button id="btn10" style="width: 90px; height: 90px;">スコア600突破</button>
-    <button id="btn11" style="width: 90px; height: 90px;">ランク10突破</button>
-    <button id="btn12" style="width: 90px; height: 90px;">ランク30突破</button>
-    <br>
-    <button id="btn13" style="width: 90px; height: 90px;">ランク50突破</button>
-    <button id="btn14" style="width: 90px; height: 90px;">正解率90%超えた</button>
-    <button id="btn15" style="width: 90px; height: 90px;">正解率95%超えた</button>
-    <button id="btn16" style="width: 90px; height: 90px;">正解率100%達成</button>
+    <input id="chatbutton" type="checkbox" value="">チャット表示・非表示
+</form>
 
+<br>
+<div class="left" style="float: left;">
+    <div id="disp1">
+        <h2>ランク</h2>
+        <p id="rank"></p>
+    </div>
+
+    <div id="disp2">
+        <h2>バッジ</h2>
+        <!-- <p id="badge"></p> -->
+        <button id="btn1" style="width: 90px; height: 90px;">ゲームを10回した</button>
+        <button id="btn2" style="width: 90px; height: 90px;">ゲームを30回した</button>
+        <button id="btn3" style="width: 90px; height: 90px;">ゲームを50回した</button>
+        <button id="btn4" style="width: 90px; height: 90px;">ゲームを1時間した</button>
+        <br>
+        <button id="btn5" style="width: 90px; height: 90px;">ゲームを3時間した</button>
+        <button id="btn6" style="width: 90px; height: 90px;">ゲームを5時間した</button>
+        <button id="btn7" style="width: 90px; height: 90px;">ゲームを10時間した</button>
+        <button id="btn8" style="width: 90px; height: 90px;">スコア500突破</button>
+        <br>
+        <button id="btn9" style="width: 90px; height: 90px;">スコア550突破</button>
+        <button id="btn10" style="width: 90px; height: 90px;">スコア600突破</button>
+        <button id="btn11" style="width: 90px; height: 90px;">ランク10突破</button>
+        <button id="btn12" style="width: 90px; height: 90px;">ランク30突破</button>
+        <br>
+        <button id="btn13" style="width: 90px; height: 90px;">ランク50突破</button>
+        <button id="btn14" style="width: 90px; height: 90px;">正解率90%超えた</button>
+        <button id="btn15" style="width: 90px; height: 90px;">正解率95%超えた</button>
+        <button id="btn16" style="width: 90px; height: 90px;">正解率100%達成</button>
+    </div>
 </div>
 <div class="right" style="float: right; padding-right: 100px; padding-left: 100px;">
-    <h2>チャット</h2>
-    <input type="text" id="content">
-    <button onclick="tweet()">つぶやく</button>
-    <p id="chat"></p>
-    <p>※つぶやき時点のランクです</p>
+    <div id="disp3">
+        <h2>チャット</h2>
+        <input type="text" id="content">
+        <button onclick="tweet()">つぶやく</button>
+        <p id="chat"></p>
+        <p>※つぶやき時点のランクです</p>
+    </div>
 </div>
 
 <!-- <button onclick="a()">a</button>
