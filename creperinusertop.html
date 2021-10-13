@@ -296,43 +296,99 @@
 
 
 
-        var rankcount = 0;
-        var badgecount = 0;
-        var chatcount = 0;
-        document.addEventListener("DOMContentLoaded", function () {     //ボタン押したら消す
+
+
+        var rankdisp = localStorage.getItem('rankdisp');
+        var badgedisp = localStorage.getItem('badgedisp');
+        var chatdisp = localStorage.getItem('chatdisp');
+        var rankingdisp = localStorage.getItem('rankingdisp');
+
+        document.addEventListener("DOMContentLoaded", function () {     //読み込み時機能を表示非表示処理。
             var rankbutton = document.getElementById("rankbutton");
             var badgebutton = document.getElementById("badgebutton");
             var chatbutton = document.getElementById("chatbutton");
-            rankbutton.addEventListener("click", function () {
-                if (rankcount == 0) {
+            var rankingbutton = document.getElementById("rankingbutton");
+
+            if (rankdisp == 0) {
+                document.getElementById("disp1").style.display = "block";
+            }
+            else {
+                document.getElementById("disp1").style.display = "none";
+            }
+
+            if (badgedisp == 0) {
+                document.getElementById("disp2").style.display = "block";
+            }
+            else {
+                document.getElementById("disp2").style.display = "none";
+            }
+            if (chatdisp == 0) {
+                document.getElementById("disp3").style.display = "block";
+            }
+            else {
+                document.getElementById("disp3").style.display = "none";
+            }
+
+
+
+            rankbutton.addEventListener("click", function () {      //ランクボタン押した時の処理
+
+                if (rankdisp == 0) {
+                    rankdisp = 1;
+                    localStorage.rankdisp = rankdisp;
                     document.getElementById("disp1").style.display = "none";
-                    rankcount = 1;
                 }
-                else if (rankcount == 1) {
+                else {
+                    rankdisp = 0;
+                    localStorage.rankdisp = rankdisp;
                     document.getElementById("disp1").style.display = "block";
-                    rankcount = 0;
                 }
             }, false);
-            badgebutton.addEventListener("click", function () {
-                if (badgecount == 0) {
+
+
+            badgebutton.addEventListener("click", function () {     //バッジボタン押した時の処理
+                if (badgedisp == 0) {
+                    badgedisp = 1;
+                    localStorage.badgedisp = badgedisp;
                     document.getElementById("disp2").style.display = "none";
-                    badgecount = 1;
                 }
-                else if (badgecount == 1) {
+                else {
+                    badgedisp = 0;
+                    localStorage.badgedisp = badgedisp;
                     document.getElementById("disp2").style.display = "block";
-                    badgecount = 0;
                 }
             }, false);
-            chatbutton.addEventListener("click", function () {
-                if (chatcount == 0) {
+
+
+            chatbutton.addEventListener("click", function () {      //チャットボタン押した時の処理
+                if (chatdisp == 0) {
+                    chatdisp = 1;
+                    localStorage.chatdisp = chatdisp;
                     document.getElementById("disp3").style.display = "none";
-                    chatcount = 1;
                 }
-                else if (chatcount == 1) {
+                else {
+                    chatdisp = 0;
+                    localStorage.chatdisp = chatdisp;
                     document.getElementById("disp3").style.display = "block";
-                    chatcount = 0;
                 }
             }, false);
+
+            rankingbutton.addEventListener("click", function () {      //ランキングボタン押した時の処理
+                if (rankingdisp == 0) {
+                    rankingdisp = 1;
+                    localStorage.rankingdisp = rankingdisp;
+                    console.log(rankingdisp);
+                    // document.getElementById("disp3").style.display = "none";
+                }
+                else {
+                    rankingdisp = 0;
+                    localStorage.rankingdisp = rankingdisp;
+                    console.log(rankingdisp);
+                    // document.getElementById("disp3").style.display = "block";
+                }
+            }, false);
+
+
         }, false);
 
     </script>
@@ -345,11 +401,13 @@
 <br>
 <br>
 <form>
-    <input id="rankbutton" type="checkbox" value="">ランク表示・非表示
+    <input id="rankbutton" type="checkbox" value="">ランク表示・非表示ボタン
     <br>
-    <input id="badgebutton" type="checkbox" value="">バッジ表示・非表示
+    <input id="badgebutton" type="checkbox" value="">バッジ表示・非表示ボタン
     <br>
-    <input id="chatbutton" type="checkbox" value="">チャット表示・非表示
+    <input id="chatbutton" type="checkbox" value="">チャット表示・非表示ボタン
+    <br>
+    <input id="rankingbutton" type="checkbox" value="">ランキング表示・非表示ボタン
 </form>
 
 <br>

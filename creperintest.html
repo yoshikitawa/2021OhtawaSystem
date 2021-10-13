@@ -627,6 +627,17 @@
             // SELECT * FROM Questions where time > current_timestamp + interval - 15 minute; 15分前から取得
         }
 
+
+        var rankingdisp = localStorage.getItem('rankingdisp');      //ランキング機能表示非表示
+        document.addEventListener("DOMContentLoaded", function () {
+            if (rankingdisp == 0) {
+                document.getElementById("disp4").style.display = "block";
+            }
+            else {
+                document.getElementById("disp4").style.display = "none";
+            }
+        }, false);
+
     </script>
 
 </head>
@@ -652,8 +663,10 @@
         <button onclick="otameshi()">もう一度遊ぶ</button>
 
     </FORM>
-    <button onclick="result()">自分のランキングを見る</button>
-    <button onclick="result2()">全ユーザのランキングを見る</button>
+    <div id="disp4">
+        <button onclick="result()">自分のランキングを見る</button>
+        <button onclick="result2()">全ユーザのランキングを見る</button>
+    </div>
     <hr>
     <!-- <p id="result"></p>
     <p id="result2"></p> -->
