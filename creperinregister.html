@@ -21,13 +21,17 @@
             var userid = document.getElementById('tf1').value;
             var password = document.getElementById('tf2').value;
             var username = document.getElementById('tf3').value;
-            localStorage.setItem('rank', Number(1));        //このページで登録押したらランクとかポイントとかは初期化される。
-            localStorage.setItem('point', Number(0));
-            localStorage.setItem('visit', Number(1));
-            localStorage.setItem('rankdisp', Number(0));
-            localStorage.setItem('badgedisp', Number(0));
-            localStorage.setItem('chatdisp', Number(0));
-            localStorage.setItem('rankingdisp', Number(0));
+            localStorage.setItem('rank', Number(1));        //このページで登録押したらランクとかポイントとかは初期化される。これはランク
+            localStorage.setItem('point', Number(0));　　　　//これは得点
+            localStorage.setItem('visit', Number(1));　　　　//これはゲームした回数
+            localStorage.setItem('rankdisp', Number(0));　  //ランク非表示表示に関するやつ
+            localStorage.setItem('badgedisp', Number(0));　 //バッジ非表示表示に関するやつ
+            localStorage.setItem('chatdisp', Number(0));　　//ランク非表示表示に関するやつ
+            localStorage.setItem('rankingdisp', Number(0));//ランキング非表示表示に関するやつ
+            localStorage.setItem('rankcount', Number(0));　  //ランク非表示表示ボタン押した回数
+            localStorage.setItem('badgecount', Number(0));　  //バッジ非表示表示ボタン押した回数
+            localStorage.setItem('chatcount', Number(0));　  //チャット非表示表示ボタン押した回数
+            localStorage.setItem('rankingcount', Number(0));　  //ランキング非表示表示ボタン押した回数
 
             var sql = `insert into Users (id, password, name) values( "${userid}","${password}", "${username}");`;
             var objects = await osql.connect(sql);

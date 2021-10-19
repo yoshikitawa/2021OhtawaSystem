@@ -38,7 +38,7 @@
         var rank = Number(localStorage.getItem('rank'));
 
 
-
+        // console.log(point);
 
         window.addEventListener('DOMContentLoaded', function () {
 
@@ -112,6 +112,7 @@
         var fourteenscore = 0;
         var fifteenscore = 0;
         var username = sessionStorage.getItem('username');
+
 
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -209,7 +210,7 @@
                         fifteenscore2 = truescore;
                         id = 0;
                         clearInterval(testTimer);
-                        alert('終了です。お疲れ様でした')   //今は1秒に一回音鳴らして15秒でおしまい。
+                        alert('終了です。お疲れ様でした')   //1分に一回音鳴らして15分でおしまい。
 
                         localStorage.visit = visit + 1;     //ゲームをした回数のカウント(ゲームが終わったら1ずつ増える)
                         console.log(visit);
@@ -289,7 +290,7 @@
                             // console.log(object.score);
                             // console.log(truescore);
                             if (object1.score <= truescore) {
-                                point = point + 10 * (12 - 1);     //1位の経験値ボーナス
+                                point = point + 10 * (12 - 1);    //1位の経験値ボーナス
                                 localStorage.point = point;
                                 console.log(point);
                                 document.getElementById('point2').innerHTML = 'ランキング1位になりました。経験値を110獲得しました';
@@ -349,6 +350,7 @@
                                 document.getElementById('point2').innerHTML = 'ランキング10位になりました。経験値を20獲得しました';
                             }
                         }
+
 
                     }
 
@@ -554,11 +556,14 @@
                     if (rank2 < rank) {     //ランクが上がったら
                         console.log(rank)
                         console.log(rank2)
+                        console.log(point);
                         document.getElementById('rank').innerHTML = 'ランクが' + rank + 'になりました';
                     }
 
 
-                }, 3000);       //今は3秒おきにしてる。本来は60秒おき
+
+
+                }, 1000);       //1秒おき
 
             }, false);
 
@@ -624,7 +629,6 @@
                 document.getElementById('test').innerHTML = html;
             }
 
-            // SELECT * FROM Questions where time > current_timestamp + interval - 15 minute; 15分前から取得
         }
 
 
@@ -652,7 +656,7 @@
         一回のゲームプレイで経験値が10溜まります。
         正答率が90%超えた場合経験値+5、100%の場合経験値+10されます。
         全ユーザーランキングトップ10に入ると順位に応じた経験値ボーナスを得れます。<br>
-        経験値が高くなるにつれランクが上がります。最高ランク50を目指し、がんばりましょう！
+        経験値が高くなるにつれランクが上がります。がんばりましょう！
 
     </p>
     <audio id="music">
@@ -689,25 +693,6 @@
     <p id="test14"></p>
     <p id="test15"></p>
     <p id="test16"></p>
-
-
-    <!-- <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">1</button>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">2</button>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">3</button>
-    <br>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">4</button>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">5</button>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">6</button>
-    <br>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">7</button>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">8</button>
-    <button onclick="number1()" style="width: 30px; height: 30px;margin:5px">9</button> -->
-
-
-
-    <!-- <button onclick="a()">a</button> -->
-
-
 
 </body>
 

@@ -95,7 +95,7 @@
         window.onload = async function () {     //トップページ読み込み時処理
             var sql = `SELECT * FROM Chat order by time desc limit 10; `;
             var objects = await osql.connect(sql);
-            console.log(objects);
+            // console.log(objects);
             var html = '';
             html = html + '<table border="1">';
             html = html + '<tr>';
@@ -121,21 +121,21 @@
 
             //バッジの処理
 
-            if (visit >= 10) {
+            if (visit >= 5) {
                 document.getElementById("btn1").removeAttribute("disabled");    //ボタン押せるようにする
                 document.getElementById('btn1').click();        //上のif条件達成時に下に書いたボタンを押す
             }
-            if (visit >= 30) {
+            if (visit >= 10) {
                 document.getElementById("btn2").removeAttribute("disabled");
                 document.getElementById('btn2').click();
             }
-            if (visit >= 50) {
+            if (visit >= 20) {
                 document.getElementById("btn3").removeAttribute("disabled");
                 document.getElementById('btn3').click();
             }
 
 
-            if (visit >= 4) {        //1回15分だから4回で1時間。今は1回45秒。
+            if (visit >= 4) {        //1回15分だから4回で1時間。
                 document.getElementById("btn4").removeAttribute("disabled");
                 document.getElementById('btn4').click();
             }
@@ -152,33 +152,33 @@
                 document.getElementById('btn7').click();
             }
 
-            if (badgescore >= 5) {          //今はスコア5行ったらにしてる。本当は500
+            if (badgescore >= 600) {          //スコア600いったら
                 document.getElementById("btn8").removeAttribute("disabled");
                 document.getElementById('btn8').click();
             }
-            if (badgescore >= 7) {
+            if (badgescore >= 750) {
                 document.getElementById("btn9").removeAttribute("disabled");
                 document.getElementById('btn9').click();
             }
-            if (badgescore >= 10) {
+            if (badgescore >= 900) {
                 document.getElementById("btn10").removeAttribute("disabled");
                 document.getElementById('btn10').click();
             }
 
-            if (rank >= 10) {
+            if (rank >= 5) {       //ランク5いったら
                 document.getElementById("btn11").removeAttribute("disabled");
                 document.getElementById('btn11').click();
             }
-            if (rank >= 30) {
+            if (rank >= 10) {
                 document.getElementById("btn12").removeAttribute("disabled");
                 document.getElementById('btn12').click();
             }
-            if (rank >= 50) {
+            if (rank >= 20) {
                 document.getElementById("btn13").removeAttribute("disabled");
                 document.getElementById('btn13').click();
             }
 
-            if (answerrate >= 90) {
+            if (answerrate >= 90) {         //正答率
                 document.getElementById("btn14").removeAttribute("disabled");
                 document.getElementById('btn14').click();
             }
@@ -302,6 +302,12 @@
         var badgedisp = localStorage.getItem('badgedisp');
         var chatdisp = localStorage.getItem('chatdisp');
         var rankingdisp = localStorage.getItem('rankingdisp');
+        var rankcount = localStorage.getItem('rankcount');
+        var badgecount = localStorage.getItem('badgecount');
+        var chatcount = localStorage.getItem('chatcount');
+        var rankingcount = localStorage.getItem('rankingcount');
+
+
 
         document.addEventListener("DOMContentLoaded", function () {     //読み込み時機能を表示非表示処理。
             var rankbutton = document.getElementById("rankbutton");
@@ -333,20 +339,29 @@
 
             rankbutton.addEventListener("click", function () {      //ランクボタン押した時の処理
 
-                if (rankdisp == 0) {
-                    rankdisp = 1;
+                rankcount = Number(rankcount) + 1;      //rankボタン押した回数。(もともと非表示状態。1回押すと表示になる。)
+                localStorage.rankcount = rankcount;
+                console.log(rankcount);
+
+                if (rankdisp == 0) {        //現在表示中なら
+                    rankdisp = 1;　　　　　　//非表示中マーク
                     localStorage.rankdisp = rankdisp;
-                    document.getElementById("disp1").style.display = "none";
+                    document.getElementById("disp1").style.display = "none";　　　//非表示にする
                 }
-                else {
-                    rankdisp = 0;
+                else {      //それ以外（現在非表示中なら）
+                    rankdisp = 0;       //表示マーク
                     localStorage.rankdisp = rankdisp;
-                    document.getElementById("disp1").style.display = "block";
+                    document.getElementById("disp1").style.display = "block";　　//表示にする
                 }
             }, false);
 
 
             badgebutton.addEventListener("click", function () {     //バッジボタン押した時の処理
+
+                badgecount = Number(badgecount) + 1;      //badgeボタン押した回数
+                localStorage.badgecount = badgecount;
+                console.log(badgecount);
+
                 if (badgedisp == 0) {
                     badgedisp = 1;
                     localStorage.badgedisp = badgedisp;
@@ -361,6 +376,11 @@
 
 
             chatbutton.addEventListener("click", function () {      //チャットボタン押した時の処理
+
+                chatcount = Number(chatcount) + 1;      //chatボタン押した回数
+                localStorage.chatcount = chatcount;
+                console.log(chatcount);
+
                 if (chatdisp == 0) {
                     chatdisp = 1;
                     localStorage.chatdisp = chatdisp;
@@ -374,6 +394,11 @@
             }, false);
 
             rankingbutton.addEventListener("click", function () {      //ランキングボタン押した時の処理
+
+                rankingcount = Number(rankingcount) + 1;      //rankingボタン押した回数
+                localStorage.rankingcount = rankingcount;
+                console.log(rankingcount);
+
                 if (rankingdisp == 0) {
                     rankingdisp = 1;
                     localStorage.rankingdisp = rankingdisp;
@@ -383,7 +408,7 @@
                 else {
                     rankingdisp = 0;
                     localStorage.rankingdisp = rankingdisp;
-                    console.log(rankingdisp);
+                    // console.log(rankingdisp);
                     // document.getElementById("disp3").style.display = "block";
                 }
             }, false);
@@ -420,22 +445,22 @@
     <div id="disp2">
         <h2>バッジ</h2>
         <!-- <p id="badge"></p> -->
-        <button id="btn1" style="width: 90px; height: 90px;">ゲームを10回した</button>
-        <button id="btn2" style="width: 90px; height: 90px;">ゲームを30回した</button>
-        <button id="btn3" style="width: 90px; height: 90px;">ゲームを50回した</button>
+        <button id="btn1" style="width: 90px; height: 90px;">ゲームを5回した</button>
+        <button id="btn2" style="width: 90px; height: 90px;">ゲームを10回した</button>
+        <button id="btn3" style="width: 90px; height: 90px;">ゲームを20回した</button>
         <button id="btn4" style="width: 90px; height: 90px;">ゲームを1時間した</button>
         <br>
         <button id="btn5" style="width: 90px; height: 90px;">ゲームを3時間した</button>
         <button id="btn6" style="width: 90px; height: 90px;">ゲームを5時間した</button>
         <button id="btn7" style="width: 90px; height: 90px;">ゲームを10時間した</button>
-        <button id="btn8" style="width: 90px; height: 90px;">スコア500突破</button>
+        <button id="btn8" style="width: 90px; height: 90px;">スコア600突破</button>
         <br>
-        <button id="btn9" style="width: 90px; height: 90px;">スコア550突破</button>
-        <button id="btn10" style="width: 90px; height: 90px;">スコア600突破</button>
-        <button id="btn11" style="width: 90px; height: 90px;">ランク10突破</button>
-        <button id="btn12" style="width: 90px; height: 90px;">ランク30突破</button>
+        <button id="btn9" style="width: 90px; height: 90px;">スコア750突破</button>
+        <button id="btn10" style="width: 90px; height: 90px;">スコア900突破</button>
+        <button id="btn11" style="width: 90px; height: 90px;">ランク5 突破</button>
+        <button id="btn12" style="width: 90px; height: 90px;">ランク10突破</button>
         <br>
-        <button id="btn13" style="width: 90px; height: 90px;">ランク50突破</button>
+        <button id="btn13" style="width: 90px; height: 90px;">ランク20突破</button>
         <button id="btn14" style="width: 90px; height: 90px;">正解率90%超えた</button>
         <button id="btn15" style="width: 90px; height: 90px;">正解率95%超えた</button>
         <button id="btn16" style="width: 90px; height: 90px;">正解率100%達成</button>
