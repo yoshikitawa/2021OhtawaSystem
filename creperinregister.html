@@ -32,6 +32,7 @@
             localStorage.setItem('badgecount', Number(0));　  //バッジ非表示表示ボタン押した回数
             localStorage.setItem('chatcount', Number(0));　  //チャット非表示表示ボタン押した回数
             localStorage.setItem('rankingcount', Number(0));　  //ランキング非表示表示ボタン押した回数
+            // localStorage.setItem('roommembercount', Number(1));　  //ルームメンバーの人数
 
             var sql = `insert into Users (id, password, name) values( "${userid}","${password}", "${username}");`;
             var objects = await osql.connect(sql);
