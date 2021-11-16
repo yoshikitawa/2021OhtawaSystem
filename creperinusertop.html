@@ -19,7 +19,7 @@
             var username = sessionStorage.getItem('username');
             document.getElementById('welcome').innerHTML = 'ようこそ' + username + 'さん';
             document.getElementById('rank').innerHTML = username + 'さんのランクは' + rank + 'です';
-            document.getElementById("createroomchat").style.display = "none";
+            // document.getElementById("createroomchat").style.display = "none";
         }
 
         var ctn = 0;
@@ -161,7 +161,7 @@
                 var objects = osql.connect(sql);
                 console.log(objects);
 
-                var sql = `SELECT * FROM Roomchat where roomname = "${contents}"; `;
+                var sql = `SELECT * FROM Roomchat; `;
                 var objects = await osql.connect(sql);
                 console.log(objects);
                 var html = '';
@@ -223,28 +223,28 @@
 
             // ルームチャットの処理
 
-            var sql = `SELECT * FROM Rooms; `;
-            var objects = await osql.connect(sql);
-            // console.log();
-            var html = '';
-            html = html + '<table border="1">';
-            html = html + '<tr>';
-            html = html + '<th>' + 'ルーム名' + '</th>';
-            // html = html + '<th>' + '人数' + '</th>';
-            html = html + '<th>' + '作成者' + '</th>';
-            // html = html + '<th>' + '参加' + '</th>';
-            html = html + '</tr>';
-            for (var i = 0; i < objects.length; i++) {
-                html = html + '<tr>';
-                var object = objects[i];
-                html = html + '<td>' + '<button onclick="join()">' + object.roomname + '</button >' + '</td>';
-                // html = html + '<td>' + 1 + '</td>';
-                html = html + '<td>' + object.creater + '</td>';
-                // html = html + '<td>' + '<button onclick="join()">参加</button>' + '</td>';
-                html = html + '</tr>';
-            }
-            html = html + '</table>';
-            document.getElementById('chat2').innerHTML = html;
+            // var sql = `SELECT * FROM Rooms; `;
+            // var objects = await osql.connect(sql);
+            // // console.log();
+            // var html = '';
+            // html = html + '<table border="1">';
+            // html = html + '<tr>';
+            // html = html + '<th>' + 'ルーム名' + '</th>';
+            // // html = html + '<th>' + '人数' + '</th>';
+            // html = html + '<th>' + '作成者' + '</th>';
+            // // html = html + '<th>' + '参加' + '</th>';
+            // html = html + '</tr>';
+            // for (var i = 0; i < objects.length; i++) {
+            //     html = html + '<tr>';
+            //     var object = objects[i];
+            //     html = html + '<td>' + '<button onclick="join()">' + object.roomname + '</button >' + '</td>';
+            //     // html = html + '<td>' + 1 + '</td>';
+            //     html = html + '<td>' + object.creater + '</td>';
+            //     // html = html + '<td>' + '<button onclick="join()">参加</button>' + '</td>';
+            //     html = html + '</tr>';
+            // }
+            // html = html + '</table>';
+            // document.getElementById('chat2').innerHTML = html;
 
 
 
@@ -505,7 +505,6 @@
                 }
             }, false);
 
-
             chatbutton.addEventListener("click", function () {      //チャットボタン押した時の処理
 
                 chatcount = Number(chatcount) + 1;      //chatボタン押した回数
@@ -601,7 +600,6 @@
 </div>
 <p id="badge"></p>
 <div class="right">　
-    <!--上のclassのrightの右にに入れてたstyle=" padding-right: 300px; padding-left: 300px;"-->
     <div id="disp3">
         <div style="float:left; padding-left: 10px;">
             <br><br>
@@ -611,7 +609,7 @@
             <p id="chat"></p>
             <p>※つぶやき時点のランクです</p>
         </div>
-        <div style="float: left; padding: 10px;">
+        <!-- <div style="float: left; padding: 10px;">
             <h2>ルームチャット</h2>
             Room名を入力してください<br>
             <input type="text" id="roomchat">
@@ -623,13 +621,10 @@
             <input type="text" id="roomchatcontent">
             <button onclick="roomtweet()">つぶやく</button>
             <p id="chat4" style="width: 550px;"></p>
-        </div>
+        </div> -->
     </div>
-    <!-- <button onclick="tweet2()">つぶやく</button> -->
 </div>
 
-<!-- <button onclick="a()">a</button>
-<button onclick="b()">b</button> -->
 
 </body>
 
