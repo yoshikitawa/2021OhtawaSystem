@@ -17,9 +17,31 @@
 
         function init() {
             var username = sessionStorage.getItem('username');
-            document.getElementById('welcome').innerHTML = 'ようこそ' + username + 'さん';
-            document.getElementById('rank').innerHTML = username + 'さんのランクは' + rank + 'です';
-            // document.getElementById("createroomchat").style.display = "none";
+            try {
+                document.getElementById('welcome').innerHTML = 'ようこそ' + username + 'さん';
+                document.getElementById('rank').innerHTML = username + 'さんのランクは' + rank + 'です';
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";;
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
         }
 
         var ctn = 0;
@@ -72,6 +94,8 @@
         }
 
 
+
+
         //Room作成の処理
         function roomcreate() {
             contents = document.getElementById('roomchat').value;
@@ -83,10 +107,7 @@
                     execSelect();
                 });
                 async function execSelect() {
-                    // var content = document.getElementById('roomchat').value;
-                    // var sql = `create table ${contents} (id serial,roomname varchar(20),creater varchar(20) ,tweet varchar(50),time datetime,rank varchar(5)); `;
-                    // var objects = osql.connect(sql);
-                    // console.log(objects);
+                    var content = document.getElementById('roomchat').value;
                     var sql = `insert into Rooms (roomname,creater) values( "${contents}","${username}");`;
                     var objects = osql.connect(sql);
                     console.log(objects);
@@ -104,7 +125,7 @@
                     for (var i = 0; i < objects.length; i++) {
                         html = html + '<tr>';
                         var object = objects[i];
-                        html = html + '<td>' + '<button onclick="join()">' + object.roomname + '</button >' + '</td>';
+                        html = html + '<td>' + `<button onclick="join${i}()">` + object.roomname + '</button >' + '</td>';
                         // html = html + '<td>' + 1 + '</td>';
                         html = html + '<td>' + object.creater + '</td>';
                         // html = html + '<td>' + '<button onclick="join()">参加</button>' + '</td>';
@@ -114,19 +135,41 @@
                     document.getElementById('chat2').innerHTML = html;
                 }
             }
+            // window.location.reload();
         }
 
 
-        function join() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理
-            document.getElementById("createroomchat").style.display = "block";
+
+        //0番目
+        function join0() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。
+            try {
+                document.getElementById("createroomchat0").style.display = "block";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
             $(document).ready(function () {
                 execSelect();
             });
             async function execSelect() {
-                // var sql = `create table ${contents} (id serial,roomname varchar(20),creater varchar(20) ,tweet varchar(50),time datetime,rank varchar(5)); `;
-                // var objects = await osql.connect(sql);
-                // console.log(objects);
-                var sql = `SELECT * FROM Roomchat; `;
+                var sql = `SELECT * FROM Join0 order by time desc;`;
                 var objects = await osql.connect(sql);
                 console.log(objects);
                 var html = '';
@@ -147,21 +190,20 @@
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
-                document.getElementById('chat4').innerHTML = html;
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatA').innerHTML = html;
             }
         }
-
-        function roomtweet() {        //つぶやきの処理
+        function roomtweet0() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
             $(document).ready(function () {
                 execSelect();
             });
             async function execSelect() {
                 var content = document.getElementById('roomchatcontent').value;
-                var sql = `insert into Roomchat (username,rank,tweet,time,roomname) values( "${username}","${rank}","${content}",now(),"${contents}");`;
+                var sql = `insert into Join0 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
                 var objects = osql.connect(sql);
                 console.log(objects);
-
-                var sql = `SELECT * FROM Roomchat; `;
+                var sql = `SELECT * FROM Join0 order by time desc; `;
                 var objects = await osql.connect(sql);
                 console.log(objects);
                 var html = '';
@@ -182,9 +224,1674 @@
                     html = html + '</tr>';
                 }
                 html = html + '</table>';
-                document.getElementById('chat4').innerHTML = html;
+                document.getElementById('chatA').innerHTML = html;
             }
         }
+
+        // 1番目
+        function join1() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。1個目のもの
+            try {
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "block";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join1 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatB').innerHTML = html;
+            }
+        }
+        function roomtweet1() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent1').value;
+                var sql = `insert into Join1 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join1 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatB').innerHTML = html;
+            }
+        }
+        //2番目
+        function join2() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。2個目のもの
+            try {
+                document.getElementById("createroomchat2").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join2 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatC').innerHTML = html;
+            }
+        }
+        function roomtweet2() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent2').value;
+                var sql = `insert into Join2 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join2 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatC').innerHTML = html;
+            }
+        }
+        //3番目
+        function join3() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。3個目のもの
+            try {
+                document.getElementById("createroomchat3").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join3 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatD').innerHTML = html;
+            }
+        }
+        function roomtweet3() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent3').value;
+                var sql = `insert into Join3 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join3 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatD').innerHTML = html;
+            }
+        }
+        //4番目
+        function join4() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。4個目のもの
+            try {
+                document.getElementById("createroomchat4").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join4 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatE').innerHTML = html;
+            }
+        }
+        function roomtweet4() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent4').value;
+                var sql = `insert into Join4 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join4 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatE').innerHTML = html;
+            }
+        }
+        //5番目
+        function join5() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat5").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join5 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatF').innerHTML = html;
+            }
+        }
+        function roomtweet5() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent5').value;
+                var sql = `insert into Join5 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join5 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatF').innerHTML = html;
+            }
+        }
+        //6番目
+        function join6() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat6").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join6 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatG').innerHTML = html;
+            }
+        }
+        function roomtweet6() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent6').value;
+                var sql = `insert into Join6 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join6 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatG').innerHTML = html;
+            }
+        }
+        //7番目
+        function join7() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat7").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join7 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatH').innerHTML = html;
+            }
+        }
+        function roomtweet7() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent7').value;
+                var sql = `insert into Join7 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join7 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatH').innerHTML = html;
+            }
+        }
+        //8番目
+        function join8() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat8").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join8 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatI').innerHTML = html;
+            }
+        }
+        function roomtweet8() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent8').value;
+                var sql = `insert into Join8 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join8 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatI').innerHTML = html;
+            }
+        }
+        //9番目
+        function join9() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat9").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join9 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatJ').innerHTML = html;
+            }
+        }
+        function roomtweet9() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent9').value;
+                var sql = `insert into Join9 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join9 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatJ').innerHTML = html;
+            }
+        }
+        //10番目
+        function join10() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat10").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join10 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatK').innerHTML = html;
+            }
+        }
+        function roomtweet10() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent10').value;
+                var sql = `insert into Join10 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join10 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatK').innerHTML = html;
+            }
+        }
+        //11番目
+        function join11() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat11").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join11 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatL').innerHTML = html;
+            }
+        }
+        function roomtweet11() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent11').value;
+                var sql = `insert into Join11 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join11 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatL').innerHTML = html;
+            }
+        }
+        //12番目
+        function join12() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat12").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join12 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatM').innerHTML = html;
+            }
+        }
+        function roomtweet12() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent12').value;
+                var sql = `insert into Join12 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join12 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatM').innerHTML = html;
+            }
+        }
+        //13番目
+        function join13() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat13").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join13 order by time desc ;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatN').innerHTML = html;
+            }
+        }
+        function roomtweet13() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent13').value;
+                var sql = `insert into Join13 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join13 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatN').innerHTML = html;
+            }
+        }
+        //14番目
+        function join14() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat14").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join14 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatO').innerHTML = html;
+            }
+        }
+        function roomtweet14() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent14').value;
+                var sql = `insert into Join14 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join14 order by time desc ; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatO').innerHTML = html;
+            }
+        }
+        //15番目
+        function join15() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat15").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join15 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatP').innerHTML = html;
+            }
+        }
+        function roomtweet15() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent15').value;
+                var sql = `insert into Join15 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join15 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatP').innerHTML = html;
+            }
+        }
+        //16番目
+        function join16() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat16").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join16 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatQ').innerHTML = html;
+            }
+        }
+        function roomtweet16() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent16').value;
+                var sql = `insert into Join16 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join16 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatQ').innerHTML = html;
+            }
+        }
+        //17番目
+        function join17() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat17").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join17 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatR').innerHTML = html;
+            }
+        }
+        function roomtweet17() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent17').value;
+                var sql = `insert into Join17 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join17 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatR').innerHTML = html;
+            }
+        }
+        //18番目
+        function join18() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat18").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat19").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join18 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatS').innerHTML = html;
+            }
+        }
+        function roomtweet18() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent18').value;
+                var sql = `insert into Join18 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join18 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatS').innerHTML = html;
+            }
+        }
+        //19番目
+        function join19() {       //ルーム作成後参加押したらルーム用のチャットが出てくる処理。5個目のもの
+            try {
+                document.getElementById("createroomchat19").style.display = "block";
+                document.getElementById("createroomchat0").style.display = "none";
+                document.getElementById("createroomchat1").style.display = "none";
+                document.getElementById("createroomchat2").style.display = "none";
+                document.getElementById("createroomchat3").style.display = "none";
+                document.getElementById("createroomchat4").style.display = "none";
+                document.getElementById("createroomchat5").style.display = "none";
+                document.getElementById("createroomchat6").style.display = "none";
+                document.getElementById("createroomchat7").style.display = "none";
+                document.getElementById("createroomchat8").style.display = "none";
+                document.getElementById("createroomchat9").style.display = "none";
+                document.getElementById("createroomchat10").style.display = "none";
+                document.getElementById("createroomchat11").style.display = "none";
+                document.getElementById("createroomchat12").style.display = "none";
+                document.getElementById("createroomchat13").style.display = "none";
+                document.getElementById("createroomchat14").style.display = "none";
+                document.getElementById("createroomchat15").style.display = "none";
+                document.getElementById("createroomchat16").style.display = "none";
+                document.getElementById("createroomchat17").style.display = "none";
+                document.getElementById("createroomchat18").style.display = "none";
+            } catch (e) {
+            }
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var sql = `SELECT * FROM Join19 order by time desc;`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                // document.getElementById('chat3').innerHTML = objects[0].roomname;
+                document.getElementById('chatT').innerHTML = html;
+            }
+        }
+        function roomtweet19() {        //join0のつぶやきの処理==1個目のルームチャットの作成した際のもの
+            $(document).ready(function () {
+                execSelect();
+            });
+            async function execSelect() {
+                var content = document.getElementById('roomchatcontent19').value;
+                var sql = `insert into Join19 (username,rank,tweet,time) values( "${username}","${rank}","${content}",now());`;
+                var objects = osql.connect(sql);
+                console.log(objects);
+                var sql = `SELECT * FROM Join19 order by time desc; `;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                html = html + '<th>' + 'ユーザー名' + '</th>';
+                html = html + '<th>' + 'ランク' + '</th>';
+                html = html + '<th>' + 'ツイート' + '</th>';
+                // html = html + '<th>' + '時間' + '</th>';
+                html = html + '</tr>';
+                for (var i = 0; i < objects.length; i++) {
+                    html = html + '<tr>';
+                    var object = objects[i];
+                    html = html + '<td>' + object.username + '</td>';
+                    html = html + '<td>' + object.rank + '</td>';
+                    html = html + '<td>' + object.tweet + '</td>';
+                    // html = html + '<td>' + object.time + '</td>';
+                    html = html + '</tr>';
+                }
+                html = html + '</table>';
+                document.getElementById('chatT').innerHTML = html;
+            }
+        }
+
+
+        //ここまで
+
+
+
+
+
+
+
+
 
 
 
@@ -220,31 +1927,30 @@
             document.getElementById('chat').innerHTML = html;
 
 
-
             // ルームチャットの処理
 
-            // var sql = `SELECT * FROM Rooms; `;
-            // var objects = await osql.connect(sql);
-            // // console.log();
-            // var html = '';
-            // html = html + '<table border="1">';
-            // html = html + '<tr>';
-            // html = html + '<th>' + 'ルーム名' + '</th>';
-            // // html = html + '<th>' + '人数' + '</th>';
-            // html = html + '<th>' + '作成者' + '</th>';
-            // // html = html + '<th>' + '参加' + '</th>';
-            // html = html + '</tr>';
-            // for (var i = 0; i < objects.length; i++) {
-            //     html = html + '<tr>';
-            //     var object = objects[i];
-            //     html = html + '<td>' + '<button onclick="join()">' + object.roomname + '</button >' + '</td>';
-            //     // html = html + '<td>' + 1 + '</td>';
-            //     html = html + '<td>' + object.creater + '</td>';
-            //     // html = html + '<td>' + '<button onclick="join()">参加</button>' + '</td>';
-            //     html = html + '</tr>';
-            // }
-            // html = html + '</table>';
-            // document.getElementById('chat2').innerHTML = html;
+            var sql = `SELECT * FROM Rooms; `;
+            var objects = await osql.connect(sql);
+            // console.log();
+            var html = '';
+            html = html + '<table border="1">';
+            html = html + '<tr>';
+            html = html + '<th>' + 'ルーム名' + '</th>';
+            // html = html + '<th>' + '人数' + '</th>';
+            html = html + '<th>' + '作成者' + '</th>';
+            // html = html + '<th>' + '参加' + '</th>';
+            html = html + '</tr>';
+            for (var i = 0; i < objects.length; i++) {
+                html = html + '<tr>';
+                var object = objects[i];
+                html = html + '<td>' + `<button onclick="join${i}()">` + object.roomname + '</button >' + '</td>';
+                // html = html + '<td>' + 1 + '</td>';
+                html = html + '<td>' + object.creater + '</td>';
+                // html = html + '<td>' + '<button onclick="join()">参加</button>' + '</td>';
+                html = html + '</tr>';
+            }
+            html = html + '</table>';
+            document.getElementById('chat2').innerHTML = html;
 
 
 
@@ -252,78 +1958,96 @@
 
             //バッジの処理
 
+            var badgemaster = 0;
             if (visit >= 5) {
                 document.getElementById("btn1").removeAttribute("disabled");    //ボタン押せるようにする
                 document.getElementById('btn1').click();        //上のif条件達成時に下に書いたボタンを押す
+                badgemaster += 1;
             }
             if (visit >= 10) {
                 document.getElementById("btn2").removeAttribute("disabled");
                 document.getElementById('btn2').click();
+                badgemaster += 1;
             }
             if (visit >= 20) {
                 document.getElementById("btn3").removeAttribute("disabled");
                 document.getElementById('btn3').click();
+                badgemaster += 1;
             }
 
 
             if (visit >= 4) {        //1回15分だから4回で1時間。
                 document.getElementById("btn4").removeAttribute("disabled");
                 document.getElementById('btn4').click();
+                badgemaster += 1;
             }
             if (visit >= 12) {
                 document.getElementById("btn5").removeAttribute("disabled");
                 document.getElementById('btn5').click();
+                badgemaster += 1;
             }
             if (visit >= 20) {
                 document.getElementById("btn6").removeAttribute("disabled");
                 document.getElementById('btn6').click();
+                badgemaster += 1;
             }
             if (visit >= 40) {
                 document.getElementById("btn7").removeAttribute("disabled");
                 document.getElementById('btn7').click();
+                badgemaster += 1;
             }
 
             if (badgescore >= 600) {          //スコア600いったら
                 document.getElementById("btn8").removeAttribute("disabled");
                 document.getElementById('btn8').click();
+                badgemaster += 1;
             }
             if (badgescore >= 750) {
                 document.getElementById("btn9").removeAttribute("disabled");
                 document.getElementById('btn9').click();
+                badgemaster += 1;
             }
             if (badgescore >= 800) {
                 document.getElementById("btn10").removeAttribute("disabled");
                 document.getElementById('btn10').click();
+                badgemaster += 1;
             }
 
             if (rank >= 5) {       //ランク5いったら
                 document.getElementById("btn11").removeAttribute("disabled");
                 document.getElementById('btn11').click();
+                badgemaster += 1;
             }
             if (rank >= 10) {
                 document.getElementById("btn12").removeAttribute("disabled");
                 document.getElementById('btn12').click();
+                badgemaster += 1;
             }
             if (rank >= 20) {
                 document.getElementById("btn13").removeAttribute("disabled");
                 document.getElementById('btn13').click();
+                badgemaster += 1;
             }
 
             if (answerrate >= 90) {         //正答率
                 document.getElementById("btn14").removeAttribute("disabled");
                 document.getElementById('btn14').click();
+                badgemaster += 1;
             }
             if (answerrate >= 95) {
                 document.getElementById("btn15").removeAttribute("disabled");
                 document.getElementById('btn15').click();
+                badgemaster += 1;
             }
             if (answerrate >= 100) {
                 document.getElementById("btn16").removeAttribute("disabled");
                 document.getElementById('btn16').click();
+                badgemaster += 1;
+            }
+            if (badgemaster == 16) {
+                document.getElementById('badge').innerHTML = 'バッチコンプリートおめでとうございます。以下のURLから新しいクレペリン検査のURLになります。<br><a href="creperintest2.html">クレペリン検査2はこちら</a>';
             }
         }
-
-
 
 
         document.addEventListener("DOMContentLoaded", function () {     //以下はボタンを押したら色変える
@@ -425,7 +2149,7 @@
                     this.style.backgroundColor = "red";
                 }
             )
-            // console.log(ctn);
+
         })
 
 
@@ -598,7 +2322,8 @@
         <button id="btn16" style="width: 90px; height: 90px;">正解率100%達成</button>
     </div>
 </div>
-<p id="badge"></p>
+<h2 id="badge"></h2>
+
 <div class="right">　
     <div id="disp3">
         <div style="float:left; padding-left: 10px;">
@@ -609,19 +2334,134 @@
             <p id="chat"></p>
             <p>※つぶやき時点のランクです</p>
         </div>
-        <!-- <div style="float: left; padding: 10px;">
+        <div style="float: left; padding: 10px;">
             <h2>ルームチャット</h2>
             Room名を入力してください<br>
             <input type="text" id="roomchat">
             <button onclick="roomcreate()">作成</button>
             <p id="chat2"></p>
         </div>
-        <div style="float: left; padding: 50px;" id="createroomchat">
+
+        <div style="float: left; padding: 50px;" id="createroomchat0">
             <h2 id="chat3"></h2>
             <input type="text" id="roomchatcontent">
-            <button onclick="roomtweet()">つぶやく</button>
-            <p id="chat4" style="width: 550px;"></p>
-        </div> -->
+            <button onclick="roomtweet0()">つぶやく</button>
+            <p id="chatA" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat1">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent1">
+            <button onclick="roomtweet1()">つぶやく</button>
+            <p id="chatB" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat2">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent2">
+            <button onclick="roomtweet2()">つぶやく</button>
+            <p id="chatC" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat3">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent3">
+            <button onclick="roomtweet3()">つぶやく</button>
+            <p id="chatD" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat4">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent4">
+            <button onclick="roomtweet4()">つぶやく</button>
+            <p id="chatE" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat5">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent5">
+            <button onclick="roomtweet5()">つぶやく</button>
+            <p id="chatF" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat6">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent6">
+            <button onclick="roomtweet6()">つぶやく</button>
+            <p id="chatG" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat7">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent7">
+            <button onclick="roomtweet7()">つぶやく</button>
+            <p id="chatH" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat8">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent8">
+            <button onclick="roomtweet8()">つぶやく</button>
+            <p id="chatI" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat9">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent9">
+            <button onclick="roomtweet9()">つぶやく</button>
+            <p id="chatJ" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat10">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent10">
+            <button onclick="roomtweet10()">つぶやく</button>
+            <p id="chatK" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat11">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent11">
+            <button onclick="roomtweet11()">つぶやく</button>
+            <p id="chatL" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat12">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent12">
+            <button onclick="roomtweet12()">つぶやく</button>
+            <p id="chatM" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat13">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent13">
+            <button onclick="roomtweet13()">つぶやく</button>
+            <p id="chatN" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat14">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent14">
+            <button onclick="roomtweet14()">つぶやく</button>
+            <p id="chatO" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat15">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent15">
+            <button onclick="roomtweet15()">つぶやく</button>
+            <p id="chatP" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat16">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent16">
+            <button onclick="roomtweet16()">つぶやく</button>
+            <p id="chatQ" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat17">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent17">
+            <button onclick="roomtweet17()">つぶやく</button>
+            <p id="chatR" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat18">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent18">
+            <button onclick="roomtweet18()">つぶやく</button>
+            <p id="chatS" style="width: 550px;"></p>
+        </div>
+        <div style="float: left; padding: 50px;" id="createroomchat19">
+            <h2 id="chat3"></h2>
+            <input type="text" id="roomchatcontent19">
+            <button onclick="roomtweet19()">つぶやく</button>
+            <p id="chatT" style="width: 550px;"></p>
+        </div>
     </div>
 </div>
 

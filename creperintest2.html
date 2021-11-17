@@ -90,6 +90,7 @@
 
         function otameshi() {
             window.location.reload();
+
         }
 
 
@@ -214,14 +215,17 @@
                         localStorage.visit = visit + 1;     //ゲームをした回数のカウント(ゲームが終わったら1ずつ増える)
                         console.log(visit);
 
+                        truescore = truescore * 15;
+                        falsescore = falsescore * 15;
+
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
 
 
 
-                        if (truescore >= 1) {         //scoreを保存しとく。元々5だった
+                        if (truescore >= 1) {         //scoreを保存しとく。
                             localStorage.setItem('badgescore', truescore);
                         }
-                        if (truescore / (truescore + falsescore) * 100 >= 90) {
+                        if (truescore / (truescore + falsescore) * 100 >= 0) {
                             localStorage.setItem('answerrate', truescore / (truescore + falsescore) * 100);
                         }
 
@@ -230,21 +234,21 @@
                         var sql = `insert into Scores (id,score,time) values( "${username}","${truescore}",now());`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
                         var objects = osql.connect(sql);
                         console.log(objects);
-                        document.getElementById('test2').innerHTML = '|'.repeat(onescore);
-                        document.getElementById('test3').innerHTML = '|'.repeat(twoscore);
-                        document.getElementById('test4').innerHTML = '|'.repeat(threescore);
-                        document.getElementById('test5').innerHTML = '|'.repeat(fourscore);
-                        document.getElementById('test6').innerHTML = '|'.repeat(fivescore);
-                        document.getElementById('test7').innerHTML = '|'.repeat(sixscore);
-                        document.getElementById('test8').innerHTML = '|'.repeat(sevenscore);
-                        document.getElementById('test9').innerHTML = '|'.repeat(eightscore);
-                        document.getElementById('test10').innerHTML = '|'.repeat(ninescore);
-                        document.getElementById('test11').innerHTML = '|'.repeat(tenscore);
-                        document.getElementById('test12').innerHTML = '|'.repeat(elevenscore);
-                        document.getElementById('test13').innerHTML = '|'.repeat(twelvescore);
-                        document.getElementById('test14').innerHTML = '|'.repeat(thirteenscore);
-                        document.getElementById('test15').innerHTML = '|'.repeat(fourteenscore);
-                        document.getElementById('test16').innerHTML = '|'.repeat(fifteenscore);
+                        document.getElementById('test2').innerHTML = '|'.repeat(onescore * 15);
+                        document.getElementById('test3').innerHTML = '|'.repeat(twoscore * 15);
+                        document.getElementById('test4').innerHTML = '|'.repeat(threescore * 15);
+                        document.getElementById('test5').innerHTML = '|'.repeat(fourscore * 15);
+                        document.getElementById('test6').innerHTML = '|'.repeat(fivescore * 15);
+                        document.getElementById('test7').innerHTML = '|'.repeat(sixscore * 15);
+                        document.getElementById('test8').innerHTML = '|'.repeat(sevenscore * 15);
+                        document.getElementById('test9').innerHTML = '|'.repeat(eightscore * 15);
+                        document.getElementById('test10').innerHTML = '|'.repeat(ninescore * 15);
+                        document.getElementById('test11').innerHTML = '|'.repeat(tenscore * 15);
+                        document.getElementById('test12').innerHTML = '|'.repeat(elevenscore * 15);
+                        document.getElementById('test13').innerHTML = '|'.repeat(twelvescore * 15);
+                        document.getElementById('test14').innerHTML = '|'.repeat(thirteenscore * 15);
+                        document.getElementById('test15').innerHTML = '|'.repeat(fourteenscore * 15);
+                        document.getElementById('test16').innerHTML = '|'.repeat(fifteenscore * 15);
 
 
                         var rank2 = rank;       //rank2はランク上がる前のランク
@@ -559,7 +563,7 @@
 
 
 
-                }, 60000);       //60秒おき
+                }, 4000);       //4秒おき
 
             }, false);
 
@@ -643,12 +647,13 @@
 </head>
 
 <body>
-    <h1>クレペリン検査</h1>
+    <h1>クレペリン検査2</h1>
     <p>
         ルール説明<br>
-        時間は15分間です。1分ごとに音が鳴り、15回鳴ります。<br>
+        時間は1分間です。4秒ごとに音が鳴り、15回鳴ります。<br>
         開始ボタンを押し、出てくる2つの数字の和の下一桁をキーボードで回答してください。回答すると右の数字が左に移り新しく右にランダムで0~9の数字が現れます。<br>
         正解できた数がスコアとして表示され、ランキング形式で見ることができます。<br>
+        スコアは15倍されます。<br>
         一回のゲームプレイで経験値が10溜まります。
         正答率が90%超えた場合経験値+5、100%の場合経験値+10されます。
         全ユーザーランキングトップ10に入ると順位に応じた経験値ボーナスを得れます。<br>
