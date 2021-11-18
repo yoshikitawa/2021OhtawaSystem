@@ -224,10 +224,12 @@
                         if (truescore / (truescore + falsescore) * 100 >= 90) {
                             localStorage.setItem('answerrate', truescore / (truescore + falsescore) * 100);
                         }
+                        var answerrate = truescore / (truescore + falsescore) * 100;
+                        // console.log(answerrate);
 
 
 
-                        var sql = `insert into Scores (id,score,time) values( "${username}","${truescore}",now());`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
+                        var sql = `insert into Scores (id,score,time,answerrate) values( "${username}","${truescore}",now(),"${answerrate}");`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
                         var objects = osql.connect(sql);
                         console.log(objects);
                         document.getElementById('test2').innerHTML = '|'.repeat(onescore);
