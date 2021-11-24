@@ -1959,39 +1959,39 @@
             //バッジの処理
 
             var badgemaster = 0;
-            if (visit >= 1) {
+            if (visit >= 2) {
                 document.getElementById("btn1").removeAttribute("disabled");    //ボタン押せるようにする
                 document.getElementById('btn1').click();        //上のif条件達成時に下に書いたボタンを押す
                 badgemaster += 1;
             }
-            if (visit >= 3) {
+            if (visit >= 6) {
                 document.getElementById("btn2").removeAttribute("disabled");
                 document.getElementById('btn2').click();
                 badgemaster += 1;
             }
-            if (visit >= 5) {
+            if (visit >= 11) {
                 document.getElementById("btn3").removeAttribute("disabled");
                 document.getElementById('btn3').click();
                 badgemaster += 1;
             }
 
 
-            if (visit >= 4) {        //1回15分だから4回で1時間。
+            if (visit >= 5) {        //1回15分だから4回で1時間。
                 document.getElementById("btn4").removeAttribute("disabled");
                 document.getElementById('btn4').click();
                 badgemaster += 1;
             }
-            if (visit >= 8) {
+            if (visit >= 9) {
                 document.getElementById("btn5").removeAttribute("disabled");
                 document.getElementById('btn5').click();
                 badgemaster += 1;
             }
-            if (visit >= 12) {
+            if (visit >= 13) {
                 document.getElementById("btn6").removeAttribute("disabled");
                 document.getElementById('btn6').click();
                 badgemaster += 1;
             }
-            if (visit >= 16) {
+            if (visit >= 17) {
                 document.getElementById("btn7").removeAttribute("disabled");
                 document.getElementById('btn7').click();
                 badgemaster += 1;
@@ -2283,7 +2283,7 @@
     <form>
         <input id="rankbutton" type="checkbox" value="">ランク表示・非表示ボタン
         <br>
-        <input id="badgebutton" type="checkbox" value="">バッジ表示・非表示ボタン
+        <input id="badgebutton" type="checkbox" value="">バッチ表示・非表示ボタン
         <br>
         <input id="chatbutton" type="checkbox" value="">チャット表示・非表示ボタン
         <br>
@@ -2300,7 +2300,7 @@
     </div>
 
     <div id="disp2">
-        <h2>バッジ</h2>
+        <h2>バッチ</h2>
         <button id="btn1" style="width: 90px; height: 90px;">ゲームを1回した</button>
         <button id="btn2" style="width: 90px; height: 90px;">ゲームを5回した</button>
         <button id="btn3" style="width: 90px; height: 90px;">ゲームを10回した</button>
