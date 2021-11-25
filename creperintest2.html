@@ -210,7 +210,7 @@
                         fifteenscore2 = truescore;
                         id = 0;
                         clearInterval(testTimer);
-                        alert('終了です。お疲れ様でした')   //1分に一回音鳴らして15分でおしまい。
+                        alert('終了です。お疲れ様でした。スクリーンショット忘れずにお願いします。')   //1分に一回音鳴らして15分でおしまい。
 
                         localStorage.visit = visit + 1;     //ゲームをした回数のカウント(ゲームが終わったら1ずつ増える)
                         console.log(visit);
@@ -219,6 +219,7 @@
                         falsescore = falsescore * 15;
 
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
+                        document.getElementById('caution').innerHTML = '毎回以下の画面スクリーンショット忘れずにお願いします。'
 
 
 
@@ -681,6 +682,7 @@
     <p id="result2"></p> -->
     <p id="point"></p>
     <p id="point2"></p>
+    <h2 id="caution" style="color: red;"></h2>
     <h2 id="rank"></h2>
     <p id="test"></p>
     <p id="test2"></p>
