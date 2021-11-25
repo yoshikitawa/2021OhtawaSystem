@@ -65,7 +65,7 @@
                     var objects = osql.connect(sql);
                     console.log(objects);
 
-                    var sql = `SELECT * FROM Chat order by time desc limit 10; `;
+                    var sql = `select username, rank, tweet, time  from Chat group by tweet order by time desc limit 10; `;
                     var objects = await osql.connect(sql);
                     console.log(objects);
                     var html = '';
@@ -1903,7 +1903,8 @@
 
 
         window.onload = async function () {     //トップページ読み込み時処理
-            var sql = `SELECT * FROM Chat order by time desc limit 10; `;
+            var sql = `select username, rank, tweet, time  from Chat group by tweet order by time desc limit 10;`;
+
             var objects = await osql.connect(sql);
             // console.log(objects);
             var html = '';
@@ -2326,7 +2327,7 @@
 
 <div class="right">　
     <div id="disp3">
-        <div style="float:left; padding-left: 10px;">
+        <div style="float:left; padding-left: 10px; width: 700px;">
             <br><br>
             <h2>オープンチャット</h2>
             <input type="text" id="content">
