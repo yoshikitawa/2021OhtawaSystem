@@ -16,7 +16,7 @@
 
 
         var visit = Number(localStorage.getItem('visit'));      //creperinregisterにvisitをsessionStorageに保存されている。それの呼び出し。
-
+        var groupnumber = localStorage.getItem('groupnumber');
 
 
 
@@ -209,15 +209,13 @@
                         fifteenscore2 = truescore;
                         id = 0;
                         clearInterval(testTimer);
-                        alert('終了です。お疲れ様でした。スクリーンショット忘れずにお願いいたします。')   //1分に一回音鳴らして15分でおしまい。
+                        alert('終了です。お疲れ様でした。')   //1分に一回音鳴らして15分でおしまい。
 
                         localStorage.visit = visit + 1;     //ゲームをした回数のカウント(ゲームが終わったら1ずつ増える)
                         console.log(visit);
 
                         document.getElementById('test').innerHTML = 'あなたのスコアは' + truescore + '/' + (truescore + falsescore) + 'です';
-                        document.getElementById('caution').innerHTML = '毎回以下の画面スクリーンショット忘れずにお願いします。'
-
-
+                        // document.getElementById('caution').innerHTML = '毎回以下の画面スクリーンショット忘れずにお願いします。'
 
                         if (truescore >= 1) {         //scoreを保存しとく。元々5だった
                             localStorage.setItem('badgescore', truescore);
@@ -230,7 +228,7 @@
 
 
 
-                        var sql = `insert into Scores (id,score,time,answerrate) values( "${username}","${truescore}",now(),"${answerrate}");`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
+                        var sql = `insert into Scores (id,score,time,answerrate,groupnumber) values( "${username}","${truescore}",now(),"${answerrate}","${groupnumber}");`;     //データベースにテーブル作った。Scoresに名前スコア時間。Questionsに名前と問題と回答とじかん。
                         var objects = osql.connect(sql);
                         console.log(objects);
                         document.getElementById('test2').innerHTML = '|'.repeat(onescore);
@@ -276,7 +274,7 @@
                             execSelect();
                         });
                         async function execSelect() {
-                            var sql = `SELECT * FROM Scores order by score desc limit 10`;
+                            var sql = `SELECT * FROM Scores where groupnumber ="${groupnumber}" order by score desc limit 10`;
                             var objects = await osql.connect(sql);
                             console.log(objects);
                             var object1 = objects[0];       //1位のスコア
@@ -562,7 +560,7 @@
 
 
 
-                }, 60000);       //60秒おき
+                }, 60000);       //60秒おき60000
 
             }, false);
 
@@ -606,7 +604,7 @@
                 execSelect();
             });
             async function execSelect() {
-                var sql = `SELECT * FROM Scores order by score desc limit 10`;
+                var sql = `SELECT * FROM Scores where groupnumber ="${groupnumber}" order by score desc limit 10`;
                 var objects = await osql.connect(sql);
                 console.log(objects);
                 var html = '';
@@ -670,7 +668,7 @@
         <button onclick="result()">自分のランキングを見る</button>
         <button onclick="result2()">全ユーザのランキングを見る</button>
     </div>
-    <a style="float: right;" href="creperinusertop.html">トップページに戻る</a>
+    <a style="float: right;" href="newcreperinusertop.html">トップページに戻る</a>
     <br>
     <hr>
     <!-- <p id="result"></p>
